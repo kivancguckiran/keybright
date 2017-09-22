@@ -39,8 +39,8 @@
     _useInspector = window.location.hash.indexOf('-inspect') !== -1,
     _isMobile = /(ipad|iphone|ipod|android)/gi.test(navigator.userAgent);
 
-    var keyword = 'MAKER FAIRE';
-    var shooting = '2017';
+    var keyword = 'TURKCELL';
+    var shooting = 'BAGLAN HAYATA';
     var sequence = [];
     var time = 1500;
 
