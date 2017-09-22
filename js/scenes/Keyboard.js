@@ -38,6 +38,40 @@
     _sceneEvents = [],
     _useInspector = window.location.hash.indexOf('-inspect') !== -1,
     _isMobile = /(ipad|iphone|ipod|android)/gi.test(navigator.userAgent);
+
+    var keyword = 'MAKER FAIRE';
+    var sequence = [];
+
+    var checkSequence = function(key) {
+        sequence.push(String.fromCharCode(key));
+
+        var result = sequence.join('') === keyword;
+
+        if (sequence.length == keyword.length) {
+            sequence.shift();
+        }
+
+        return result;
+    }
+
+    var shootAir = function() {
+        for (var i = 0; i < keyword.length; i++) {
+            if (keyword[i] != ' ') {
+                Keyboard.shootLetter(keyword.charCodeAt(i));
+            }
+        }
+    }
+
+    var fireworks = function() {
+        for(i = 0; i < 31; i++) {
+            if (i % 4 == 0) {
+                setTimeout(function() { Keyboard.explode(); }, i * 250);
+            }
+            else  {
+                setTimeout(function() { shootAir(); }, i * 250);
+            }
+        }
+    }
     
     // initialise the Keyboard
     Keyboard.init = function() {
@@ -236,6 +270,10 @@
                 //Delete is pressed
                 if(key == 46){
                     Keyboard.deleteLast();
+                }
+
+                if(checkSequence(key)) {
+                    fireworks();
                 }
 
                 Keyboard.destroyFallenLetters();
