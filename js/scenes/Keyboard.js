@@ -42,7 +42,7 @@
     var keyword = 'MAKER FAIRE';
     var shooting = '2017';
     var sequence = [];
-    var time = 1000;
+    var time = 1500;
 
     var checkSequence = function(key) {
         sequence.push(String.fromCharCode(key));
