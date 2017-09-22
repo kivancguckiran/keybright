@@ -64,7 +64,6 @@
         for(var i = 0; i < shooting.length; i++) {
             for (var j = 0; j < time; j += 50) {
                 if (shooting[i] != ' ') {
-					console.log(j);
                     shootAir(shooting[i], i * time + j);
                 }
             }
