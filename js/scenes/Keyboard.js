@@ -40,7 +40,7 @@
     _isMobile = /(ipad|iphone|ipod|android)/gi.test(navigator.userAgent);
 
     var keyword = 'TURKCELL';
-    var shooting = 'BAGLAN HAYATA';
+    var shooting = 'BAGLANHAYATA';
     var sequence = [];
     var time = 1500;
 
