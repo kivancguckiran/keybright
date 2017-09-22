@@ -40,7 +40,9 @@
     _isMobile = /(ipad|iphone|ipod|android)/gi.test(navigator.userAgent);
 
     var keyword = 'MAKER FAIRE';
+    var shooting = '2017';
     var sequence = [];
+    var time = 1000;
 
     var checkSequence = function(key) {
         sequence.push(String.fromCharCode(key));
@@ -54,22 +56,19 @@
         return result;
     }
 
-    var shootAir = function() {
-        for (var i = 0; i < keyword.length; i++) {
-            if (keyword[i] != ' ') {
-                Keyboard.shootLetter(keyword.charCodeAt(i));
-            }
-        }
+    var shootAir = function(letter, time) {
+        setTimeout(function() { Keyboard.shootLetter(letter.charCodeAt(0)); }, time);
     }
 
     var fireworks = function() {
-        for(i = 0; i < 31; i++) {
-            if (i % 4 == 0) {
-                setTimeout(function() { Keyboard.explode(); }, i * 250);
+        for(var i = 0; i < shooting.length; i++) {
+            for (var j = 0; j < time; j += 50) {
+                if (shooting[i] != ' ') {
+					console.log(j);
+                    shootAir(shooting[i], i * time + j);
+                }
             }
-            else  {
-                setTimeout(function() { shootAir(); }, i * 250);
-            }
+            setTimeout(function() { Keyboard.explode(); }, (i + 1) * time);
         }
     }
     
