@@ -39,17 +39,29 @@
     _useInspector = window.location.hash.indexOf('-inspect') !== -1,
     _isMobile = /(ipad|iphone|ipod|android)/gi.test(navigator.userAgent);
 
-    var keyword = 'TURKCELL';
-    var shooting = 'BAGLANHAYATA';
+    var keywords =  ['MAKER FAIRE', 'HAKAN', 'KORKMA'];
+    var shootings = ['2017',        'ATAS',  'SONMEZ'];
     var sequence = [];
+    var max_sequence = keywords.reduce(function (a, b) { return a.length > b.length ? a : b; }).length;
     var time = 1500;
 
     var checkSequence = function(key) {
+        var result = -1;
+
         sequence.push(String.fromCharCode(key));
 
-        var result = sequence.join('') === keyword;
+        for(var i = 0; i < keywords.length; i++) {console.log(sequence);
+            var check = sequence.join('').indexOf(keywords[i]) !== -1;
 
-        if (sequence.length == keyword.length) {
+            if (check) {
+                sequence = [];
+                result = i;
+                break;
+            }
+
+        }
+
+        if (sequence.length == max_sequence) {
             sequence.shift();
         }
 
@@ -60,11 +72,11 @@
         setTimeout(function() { Keyboard.shootLetter(letter.charCodeAt(0)); }, time);
     }
 
-    var fireworks = function() {
-        for(var i = 0; i < shooting.length; i++) {
+    var fireworks = function(index) {
+        for(var i = 0; i < shootings[index].length; i++) {
             for (var j = 0; j < time; j += 100) {
-                if (shooting[i] != ' ') {
-                    shootAir(shooting[i], i * time + j);
+                if (shootings[index][i] != ' ') {
+                    shootAir(shootings[index][i], i * time + j);
                 }
             }
             setTimeout(function() { Keyboard.explode(); }, (i + 1) * time);
@@ -270,8 +282,9 @@
                     Keyboard.deleteLast();
                 }
 
-                if(checkSequence(key)) {
-                    fireworks();
+                var index = checkSequence(key);
+                if(index != -1) {
+                    fireworks(index);
                 }
 
                 Keyboard.destroyFallenLetters();
